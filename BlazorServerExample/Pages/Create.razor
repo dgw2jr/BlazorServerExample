@@ -1,0 +1,31 @@
+﻿@page "/Create"
+@using Data
+@using System.Diagnostics
+@inject NavigationManager _navigationManager
+@inject WeatherContext _context
+
+<h3>Create</h3>
+
+<EditForm Model="@Model" OnValidSubmit="ValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>Summary: <InputText @bind-Value="Model.Summary"></InputText></div>
+    <div>Temperature (F): <InputNumber @bind-Value="Model.TemperatureF"></InputNumber></div>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private WeatherForecast Model = new WeatherForecast();
+
+    private void ValidSubmit()
+    {
+        Model.Date = DateTime.UtcNow;
+
+        Debug.Write(Model.Date);
+        _context.Add(Model);
+        _context.SaveChanges();
+
+        _navigationManager.NavigateTo("fetchdata");
+    }
+}
