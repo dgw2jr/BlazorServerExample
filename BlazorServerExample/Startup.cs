@@ -31,6 +31,7 @@ namespace BlazorServerExample
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddDbContext<WeatherContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WeatherContext")));
+            services.AddAntDesign();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

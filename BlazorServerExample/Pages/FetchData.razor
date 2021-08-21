@@ -13,27 +13,11 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var forecast in forecasts)
-            {
-                <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <Table DataSource="forecasts">
+        <Column Field="context.Date"></Column>
+        <Column Field="context.TemperatureF"></Column>
+        <Column Field="context.Summary"></Column>
+    </Table>
 
     <NavLink href="create">Create</NavLink>
 }
@@ -44,5 +28,6 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = _context.WeatherForecasts.ToArray();
+        await Task.CompletedTask;
     }
 }

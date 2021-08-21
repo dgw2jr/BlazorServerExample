@@ -6,14 +6,20 @@
 
 <h3>Create</h3>
 
-<EditForm Model="@Model" OnValidSubmit="ValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <div>Summary: <InputText @bind-Value="Model.Summary"></InputText></div>
-    <div>Temperature (F): <InputNumber @bind-Value="Model.TemperatureF"></InputNumber></div>
+<Form Model="@Model" OnFinish="ValidSubmit">
+    <FormItem>
+        Summary: <Input @bind-Value="Model.Summary"></Input>
+    </FormItem>
+    <FormItem>
+        Temperature (F): <InputNumber @bind-Value="Model.TemperatureF"></InputNumber>
+    </FormItem>
 
-    <button type="submit">Submit</button>
-</EditForm>
+    <FormItem WrapperColOffset="8" WrapperColSpan="16">
+        <Button Type="@ButtonType.Primary" HtmlType="submit">
+            Submit
+        </Button>
+    </FormItem>
+</Form>
 
 @code {
     private WeatherForecast Model = new WeatherForecast();
